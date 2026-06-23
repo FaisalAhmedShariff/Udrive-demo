@@ -1,238 +1,183 @@
-// src/app/fleet/[id]/page.js
 "use client";
 
-import React, { useState, use } from "react";
+import { useState, use } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, CheckCircle, ShieldCheck, HelpCircle } from "lucide-react";
+import { ArrowLeft, CheckCircle, ShieldCheck, HelpCircle, ChevronLeft, ChevronRight } from "lucide-react";
 import { mockVehicles } from "@/data/mockVehicles";
 import SpecsGrid from "@/components/SpecsGrid";
+import PricingTable from "@/components/PricingTable";
 import WhatsAppButton from "@/components/WhatsAppButton";
-import BookingModal from "@/components/BookingModal";
+import BookNowModal from "@/components/BookNowModal";
 import TrustBadgeRow from "@/components/TrustBadgeRow";
+import ScrollReveal from "@/components/ScrollReveal";
 
 export default function VehicleDetail({ params }) {
-  // Unwrap params using the standard React.use() hook in Next.js 15 client components
-  const resolvedParams = use(params);
-  const { id } = resolvedParams;
-
+  const { id } = use(params);
   const vehicle = mockVehicles.find((v) => v.id === id);
 
-  if (!vehicle) {
-    notFound();
-  }
+  if (!vehicle) notFound();
 
   const [activeImageIdx, setActiveImageIdx] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Math conversions for display
-  const weeklyDailyEquivalent = Math.round(vehicle.pricing.weekly / 7);
-  const monthlyDailyEquivalent = Math.round(vehicle.pricing.monthly / 30);
+  const prevImage = () =>
+    setActiveImageIdx((i) => (i === 0 ? vehicle.images.length - 1 : i - 1));
+  const nextImage = () =>
+    setActiveImageIdx((i) => (i === vehicle.images.length - 1 ? 0 : i + 1));
 
   return (
-    <div className="pt-24 min-h-screen bg-luxury-black pb-24 text-gray-300">
-      {/* Back Button Link */}
+    <div className="pt-24 min-h-screen bg-luxury-black pb-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <Link
           href="/fleet"
-          className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-gray-400 hover:text-gold-500 font-bold transition-colors"
+          className="inline-flex items-center gap-2 text-[11px] uppercase tracking-widest text-gray-500 hover:text-accent font-bold transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
-          <span>Back to Fleet Listings</span>
+          Back to Fleet
         </Link>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-          
-          {/* Left Column: Image Gallery */}
-          <div className="lg:col-span-7 space-y-4">
-            {/* Active Display */}
-            <div className="relative aspect-video w-full rounded-lg overflow-hidden bg-black/40 border border-white/5 shadow-2xl">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
+          <ScrollReveal className="lg:col-span-7 space-y-4" direction="left">
+            <div className="relative aspect-video rounded-lg overflow-hidden bg-black/40 border border-white/[0.06] group">
               <img
                 src={vehicle.images[activeImageIdx]}
                 alt={`${vehicle.brand} ${vehicle.name}`}
-                className="w-full h-full object-cover transition-opacity duration-300"
+                className="w-full h-full object-cover"
               />
               {vehicle.isOwnFleet && (
-                <div className="absolute top-4 left-4 bg-gradient-to-r from-gold-600 to-gold-700 text-black text-[9px] uppercase tracking-widest font-black px-2.5 py-1 rounded-sm">
-                  Our Fleet Special
+                <div className="absolute top-4 left-4 bg-accent text-[#0A0A0B] text-[9px] uppercase tracking-widest font-black px-2.5 py-1 rounded-sm">
+                  Our Fleet
                 </div>
               )}
+              <button
+                type="button"
+                onClick={prevImage}
+                className="absolute left-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black/70"
+                aria-label="Previous image"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <button
+                type="button"
+                onClick={nextImage}
+                className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black/70"
+                aria-label="Next image"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
             </div>
 
-            {/* Thumbnails */}
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-4 sm:grid-cols-5 gap-2">
               {vehicle.images.map((img, idx) => (
                 <button
                   key={idx}
+                  type="button"
                   onClick={() => setActiveImageIdx(idx)}
-                  className={`relative aspect-video roundedoverflow-hidden border bg-black/20 ${
+                  className={`relative aspect-video rounded overflow-hidden border transition-all ${
                     idx === activeImageIdx
-                      ? "border-gold-500 ring-1 ring-gold-500/20"
-                      : "border-white/10 hover:border-white/30"
-                  } transition-all`}
+                      ? "border-accent ring-1 ring-accent/30"
+                      : "border-white/[0.08] hover:border-white/20"
+                  }`}
                 >
-                  <img
-                    src={img}
-                    alt={`${vehicle.name} Thumbnail ${idx + 1}`}
-                    className="w-full h-full object-cover"
-                  />
+                  <img src={img} alt="" className="w-full h-full object-cover" />
                 </button>
               ))}
             </div>
 
-            {/* Trust Badges */}
-            <div className="pt-6">
-              <TrustBadgeRow />
-            </div>
-          </div>
+            <TrustBadgeRow className="pt-4" />
+          </ScrollReveal>
 
-          {/* Right Column: Pricing, Specs & Actions */}
-          <div className="lg:col-span-5 space-y-8">
-            {/* Header info */}
+          <ScrollReveal className="lg:col-span-5 space-y-6" direction="right">
             <div>
-              <span className="text-xs uppercase tracking-[0.25em] text-gold-500 font-bold block">
-                {vehicle.category} CAR
+              <span className="text-[10px] uppercase tracking-[0.25em] text-accent font-bold">
+                {vehicle.category}
               </span>
-              <h1 className="font-serif text-3xl sm:text-5xl font-black text-white uppercase tracking-[0.05em] mt-1 leading-none">
-                {vehicle.brand} <span className="gold-text-gradient font-bold">{vehicle.name}</span>
+              <h1 className="font-serif text-3xl sm:text-4xl font-black text-white uppercase mt-1 leading-tight">
+                {vehicle.brand}{" "}
+                <span className="accent-text-gradient">{vehicle.name}</span>
               </h1>
-              <p className="text-sm text-gray-400 mt-4 leading-relaxed">
-                {vehicle.description}
-              </p>
+              <p className="text-sm text-gray-500 mt-4 leading-relaxed">{vehicle.description}</p>
             </div>
 
-            {/* Pricing Table (Daily, Weekly, Monthly) */}
-            <div className="bg-[#0c0c0c] border border-white/5 rounded p-6 space-y-4">
-              <h4 className="text-white text-xs uppercase tracking-widest font-bold border-b border-white/5 pb-2">
-                Rental Rates Breakdown
-              </h4>
-              <div className="space-y-3.5">
-                {/* Daily */}
-                <div className="flex justify-between items-center text-sm">
-                  <span className="text-gray-400">Daily (1-6 Days)</span>
-                  <span className="text-white font-semibold">
-                    AED {vehicle.pricing.daily.toLocaleString()}
-                    <span className="text-xs font-normal text-gray-500"> /day</span>
-                  </span>
-                </div>
-                
-                {/* Weekly */}
-                <div className="flex justify-between items-center text-sm border-t border-white/5 pt-3">
-                  <div className="flex flex-col">
-                    <span className="text-gray-400">Weekly (7+ Days)</span>
-                    <span className="text-[10px] text-gray-600">Save equivalent of AED {(vehicle.pricing.daily - weeklyDailyEquivalent).toLocaleString()}/day</span>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-white font-semibold block">
-                      AED {vehicle.pricing.weekly.toLocaleString()}
-                    </span>
-                    <span className="text-[10px] text-gold-500 font-medium uppercase tracking-wider block">
-                      AED {weeklyDailyEquivalent.toLocaleString()} /day
-                    </span>
-                  </div>
-                </div>
+            <PricingTable pricing={vehicle.pricing} />
 
-                {/* Monthly */}
-                <div className="flex justify-between items-center text-sm border-t border-white/5 pt-3 bg-gold-500/5 -mx-6 px-6 py-2">
-                  <div className="flex flex-col">
-                    <span className="text-gold-500 font-bold uppercase tracking-wider text-xs">Monthly (30+ Days)</span>
-                    <span className="text-[10px] text-gold-500/50">Best value pricing package</span>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-gold-500 font-black text-base block">
-                      AED {vehicle.pricing.monthly.toLocaleString()}
-                    </span>
-                    <span className="text-[10px] text-gold-400 font-bold uppercase tracking-wider block">
-                      AED {monthlyDailyEquivalent.toLocaleString()} /day
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Main Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-3 pt-2">
+            {/* Book Now — opens modal ONLY, no WhatsApp */}
+            <div className="space-y-3 pt-2">
               <button
+                type="button"
                 onClick={() => setIsModalOpen(true)}
-                className="flex-1 py-4 rounded bg-gradient-to-r from-gold-600 via-gold-500 to-gold-700 text-black text-xs uppercase tracking-widest font-black hover:shadow-lg hover:shadow-gold-500/20 transition-all duration-300 text-center"
+                className="w-full py-4 rounded-lg bg-accent text-[#0A0A0B] text-xs uppercase tracking-[0.2em] font-black hover:opacity-90 transition-opacity"
               >
                 Book Now
               </button>
               <WhatsAppButton
                 vehicleName={`${vehicle.brand} ${vehicle.name}`}
                 dailyPrice={vehicle.pricing.daily}
-                className="flex-1 py-4"
+                variant="outline"
+                className="w-full py-4"
               />
             </div>
 
-            {/* Note */}
-            <div className="flex items-start gap-2 bg-white/5 p-4 rounded border border-white/5 text-xs text-gray-500 leading-normal">
-              <ShieldCheck className="w-5 h-5 text-gold-500 shrink-0 mt-0.5" />
+            <div className="flex items-start gap-2 bg-white/[0.03] p-4 rounded-lg border border-white/[0.06] text-xs text-gray-500">
+              <ShieldCheck className="w-5 h-5 text-accent shrink-0" />
               <span>
-                Booking requests are processed offline. Submit a request above, and our VIP support desk will contact you within 15 minutes to arrange free vehicle delivery.
+                <strong className="text-gray-400">Book Now</strong> submits an enquiry to our
+                team — it does not open WhatsApp. Use the green WhatsApp button for instant chat.
               </span>
             </div>
-
-          </div>
+          </ScrollReveal>
         </div>
 
-        {/* Technical Specifications Grid */}
-        <div className="mt-20 pt-10 border-t border-white/5">
-          <h3 className="font-serif text-xl font-black text-white uppercase tracking-[0.05em] mb-8">
-            Technical Specifications
-          </h3>
+        <ScrollReveal className="mt-20 pt-10 border-t border-white/[0.06]">
+          <h2 className="font-serif text-xl font-black text-white uppercase tracking-wide mb-8">
+            Specifications
+          </h2>
           <SpecsGrid
             horsepower={vehicle.horsepower}
             acceleration={vehicle.acceleration0to100}
+            topSpeed={vehicle.topSpeed}
             seats={vehicle.seats}
             specs={vehicle.specs}
           />
-        </div>
+        </ScrollReveal>
 
-        {/* Features Checklist */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-16 pt-10 border-t border-white/5">
+        <ScrollReveal className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-16 pt-10 border-t border-white/[0.06]" delay={100}>
           <div>
-            <h3 className="font-serif text-xl font-black text-white uppercase tracking-[0.05em] mb-6">
-              Included Features
-            </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {vehicle.features.map((feature, idx) => (
-                <div key={idx} className="flex items-center gap-2.5 text-sm text-gray-300">
-                  <CheckCircle className="w-4 h-4 text-gold-500 shrink-0" />
-                  <span>{feature}</span>
-                </div>
+            <h2 className="font-serif text-xl font-black text-white uppercase tracking-wide mb-6">
+              Features
+            </h2>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {vehicle.features.map((feature) => (
+                <li key={feature} className="flex items-center gap-2 text-sm text-gray-400">
+                  <CheckCircle className="w-4 h-4 text-accent shrink-0" />
+                  {feature}
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
 
-          {/* Rental terms brief */}
-          <div className="bg-[#0a0a0a] border border-white/5 rounded p-6 flex flex-col justify-between">
-            <div>
-              <h4 className="text-white text-xs uppercase tracking-widest font-bold mb-4 flex items-center gap-1.5">
-                <HelpCircle className="w-4 h-4 text-gold-500" />
-                <span>Dubai Rental Rules Brief</span>
-              </h4>
-              <ul className="space-y-3 text-xs text-gray-400">
-                <li>• A valid driver's license, passport, and visit visa copy are mandatory.</li>
-                <li>• Telematics logs speeding above 130 km/h; radar fines are billed separately.</li>
-                <li>• Standard mileage limit is 250 km per day. Extra is billed per km.</li>
-                <li>• No off-road or racetrack driving allowed under any circumstances.</li>
-              </ul>
-            </div>
-            <Link
-              href="/#conditions"
-              className="text-gold-500 hover:text-white text-xs uppercase tracking-wider font-bold mt-6 inline-block"
-            >
-              Read Full Rental Conditions &rarr;
+          <div className="bg-[#121214] border border-white/[0.06] rounded-lg p-6">
+            <h3 className="text-xs uppercase tracking-widest font-bold text-white mb-4 flex items-center gap-2">
+              <HelpCircle className="w-4 h-4 text-accent" />
+              Quick Rental Notes
+            </h3>
+            <ul className="space-y-2.5 text-xs text-gray-500 leading-relaxed">
+              <li>• Valid licence, passport, and visa required at handover.</li>
+              <li>• 250 km/day included; excess billed per km.</li>
+              <li>• No off-road or track use permitted.</li>
+              <li>• Comprehensive insurance included; police report mandatory for claims.</li>
+            </ul>
+            <Link href="/#conditions" className="text-accent text-xs uppercase tracking-wider font-bold mt-5 inline-block hover:text-white transition-colors">
+              Full conditions →
             </Link>
           </div>
-        </div>
+        </ScrollReveal>
       </div>
 
-      {/* Booking Modal */}
-      <BookingModal
+      <BookNowModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         vehicle={vehicle}

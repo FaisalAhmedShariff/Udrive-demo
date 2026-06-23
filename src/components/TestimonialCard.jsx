@@ -14,9 +14,7 @@ export default function TestimonialCard({ name, rating, text, date }) {
             <Star
               key={idx}
               className={`w-4 h-4 ${
-                idx < rating
-                  ? "text-gold-500 fill-gold-500"
-                  : "text-gray-600"
+                idx < rating ? "text-accent fill-accent" : "text-gray-700"
               }`}
             />
           ))}

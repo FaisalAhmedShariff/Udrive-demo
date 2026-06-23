@@ -1,62 +1,72 @@
 @import "tailwindcss";
 
 @theme {
-  --color-gold-50: #fbf8eb;
-  --color-gold-100: #f4ebb9;
-  --color-gold-200: #ecdd86;
-  --color-gold-300: #e2cb53;
-  --color-gold-400: #dbbb35;
-  --color-gold-500: #d4af37; /* Base Gold */
-  --color-gold-600: #b5902b;
-  --color-gold-700: #8c6e21;
-  --color-gold-800: #634d19;
-  --color-gold-900: #423311;
-  --color-gold-950: #261d07;
+  --color-accent-50: #faf6eb;
+  --color-accent-100: #f0e4c4;
+  --color-accent-200: #e2cc8f;
+  --color-accent-300: #d4b45a;
+  --color-accent-400: #c9a04e;
+  --color-accent-500: #c9a04e;
+  --color-accent-600: #a8833f;
+  --color-accent-700: #826632;
+  --color-accent-800: #5c4824;
+  --color-accent-900: #3b2f18;
+  --color-accent-950: #221b0e;
 
-  --color-luxury-black: #070707;
-  --color-luxury-gray: #121212;
-  --color-luxury-light: #1e1e1e;
-  
+  /* Legacy alias — maps to accent palette */
+  --color-gold-400: var(--color-accent-400);
+  --color-gold-500: var(--color-accent-500);
+  --color-gold-600: var(--color-accent-600);
+  --color-gold-700: var(--color-accent-700);
+
+  --color-luxury-black: #0a0a0b;
+  --color-luxury-gray: #121214;
+  --color-luxury-light: #1a1a1c;
+
   --font-serif: var(--font-cinzel), serif;
-  --font-sans: var(--font-montserrat), sans-serif;
-  
-  --animate-infinite-scroll: infinite-scroll 35s linear infinite;
-  
+  --font-sans: var(--font-dm-sans), sans-serif;
+
+  --animate-infinite-scroll: infinite-scroll 40s linear infinite;
+  --animate-hero-ken-burns: hero-ken-burns 22s ease-in-out infinite alternate;
+
   @keyframes infinite-scroll {
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }
   }
+
+  @keyframes hero-ken-burns {
+    from { transform: scale(1.05) translate(0, 0); }
+    to { transform: scale(1.12) translate(-1.5%, -0.5%); }
+  }
 }
 
 :root {
-  --background: #070707;
-  --foreground: #f3f4f6;
+  --background: #0a0a0b;
+  --foreground: #ececec;
 }
 
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: var(--font-montserrat), sans-serif;
+  font-family: var(--font-dm-sans), sans-serif;
   overflow-x: hidden;
 }
 
-/* Custom premium scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: #070707;
+  background: #0a0a0b;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e1e1e;
+  background: #1a1a1c;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #d4af37;
+  background: #c9a04e;
 }
 
-/* Hide default utilities */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -65,43 +75,35 @@ body {
   scrollbar-width: none;
 }
 
-/* Premium Styling Utilities */
 .gradient-overlay {
-  background: linear-gradient(to top, rgba(7, 7, 7, 1) 0%, rgba(7, 7, 7, 0.2) 60%, rgba(7, 7, 7, 0.9) 100%);
+  background: linear-gradient(
+    to top,
+    rgba(10, 10, 11, 1) 0%,
+    rgba(10, 10, 11, 0.15) 45%,
+    rgba(10, 10, 11, 0.75) 100%
+  );
 }
 
-.gold-gradient {
-  background: linear-gradient(135deg, #d4af37 0%, #f5e4a3 50%, #b5902b 100%);
+.hero-vignette {
+  background: radial-gradient(ellipse at center, transparent 0%, rgba(10, 10, 11, 0.55) 100%);
 }
 
-.gold-text-gradient {
-  background: linear-gradient(135deg, #d4af37 0%, #f5e4a3 50%, #b5902b 100%);
+.gold-text-gradient,
+.accent-text-gradient {
+  background: linear-gradient(135deg, #c9a04e 0%, #f0dfa0 45%, #a8833f 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-/* Gold stroke outline text for numbers and decorative accents */
-.text-stroke-gold {
-  -webkit-text-stroke: 1px rgba(212, 175, 55, 0.35);
+.text-stroke-accent {
+  -webkit-text-stroke: 1px rgba(201, 160, 78, 0.35);
   color: transparent;
 }
 
-.text-stroke-gold-hover:hover {
-  -webkit-text-stroke: 1px rgba(212, 175, 55, 0.9);
-}
-
-.gold-card-shadow {
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.05);
-}
-
-.gold-card-shadow:hover {
-  box-shadow: 0 10px 40px rgba(212, 175, 55, 0.08), 0 0 0 1px rgba(212, 175, 55, 0.25);
-}
-
-/* Luxury Grid Lines Overlay */
 .luxury-grid-lines {
-  background-size: 80px 80px;
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 72px 72px;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
 }
