@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+@theme {
+  --color-gold-50: #fbf8eb;
+  --color-gold-100: #f4ebb9;
+  --color-gold-200: #ecdd86;
+  --color-gold-300: #e2cb53;
+  --color-gold-400: #dbbb35;
+  --color-gold-500: #d4af37; /* Base Gold */
+  --color-gold-600: #b5902b;
+  --color-gold-700: #8c6e21;
+  --color-gold-800: #634d19;
+  --color-gold-900: #423311;
+  --color-gold-950: #261d07;
+
+  --color-luxury-black: #070707;
+  --color-luxury-gray: #121212;
+  --color-luxury-light: #1e1e1e;
+  
+  --animate-infinite-scroll: infinite-scroll 25s linear infinite;
+  
+  @keyframes infinite-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+}
+
+:root {
+  --background: #070707;
+  --foreground: #f3f4f6;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), sans-serif;
+  overflow-x: hidden;
+}
+
+/* Custom premium scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #070707;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e1e1e;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #d4af37;
+}
+
+/* Hide default utilities */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Smooth fade-in overlay */
+.gradient-overlay {
+  background: linear-gradient(to top, rgba(7, 7, 7, 1) 0%, rgba(7, 7, 7, 0.4) 50%, rgba(7, 7, 7, 0.8) 100%);
+}
+
+.gold-gradient {
+  background: linear-gradient(135deg, #d4af37 0%, #f4ebb9 50%, #b5902b 100%);
+}
+
+.gold-text-gradient {
+  background: linear-gradient(135deg, #d4af37 0%, #f4ebb9 50%, #b5902b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
