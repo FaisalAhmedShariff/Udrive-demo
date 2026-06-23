@@ -42,10 +42,10 @@ export default function Contact() {
     <div className="pt-24 min-h-screen bg-luxury-black pb-24 text-gray-300">
       {/* Page Title */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center sm:text-left">
-        <span className="text-xs uppercase tracking-widest text-gold-500 font-bold block mb-1">
+        <span className="text-xs uppercase tracking-[0.25em] text-gold-500 font-bold block mb-1">
           GET IN TOUCH
         </span>
-        <h1 className="text-3xl sm:text-5xl font-black text-white uppercase tracking-tight">
+        <h1 className="font-serif text-3xl sm:text-5xl font-black text-white uppercase tracking-[0.05em]">
           Contact Our <span className="gold-text-gradient">VIP Desk</span>
         </h1>
         <p className="text-gray-400 text-sm mt-2 max-w-xl">

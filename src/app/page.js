@@ -26,17 +26,17 @@ export default function Home() {
 
   const steps = [
     {
-      num: "01",
+      num: "I",
       title: "Choose Your Vehicle",
       desc: "Browse our elite fleet of sport supercars, executive sedans, and high-performance SUVs to find your perfect match."
     },
     {
-      num: "02",
+      num: "II",
       title: "Schedule Your Rental",
       desc: "Select your dates and delivery location. Our VIP concierge team coordinates instant delivery to your doorstep."
     },
     {
-      num: "03",
+      num: "III",
       title: "Enjoy The Drive",
       desc: "Receive the keys, experience the unmatched power, and cruise the iconic Dubai highways in style."
     }
@@ -70,7 +70,7 @@ export default function Home() {
   ];
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-full overflow-hidden bg-luxury-black">
       {/* Cinematic Hero Section */}
       <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-black">
         {/* Background Video */}
@@ -80,68 +80,87 @@ export default function Home() {
             loop
             muted
             playsInline
-            className="w-full h-full object-cover opacity-50"
+            className="w-full h-full object-cover opacity-45 scale-[1.02] filter brightness-75"
           >
             <source
               src="https://player.vimeo.com/external/435674703.sd.mp4?s=7f26410ec4210d65b706c27447669d06e23631f4&profile_id=164&oauth2_token_id=57447761"
               type="video/mp4"
             />
           </video>
+          {/* Subtle Grid Overlay on top of video */}
+          <div className="absolute inset-0 luxury-grid-lines opacity-20 pointer-events-none"></div>
           {/* Fallback back-blur and gradient */}
           <div className="absolute inset-0 gradient-overlay"></div>
         </div>
 
         {/* Hero Content */}
-        <div className="relative z-10 max-w-5xl mx-auto px-4 text-center space-y-6">
-          <span className="text-xs uppercase tracking-widest text-gold-500 font-bold block animate-fade-in">
-            PREMIUM CAR RENTAL DUBAI
-          </span>
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold text-white tracking-tight uppercase leading-tight">
-            Unleash the <span className="gold-text-gradient">Ultimate</span> Drive
+        <div className="relative z-10 max-w-5xl mx-auto px-4 text-center space-y-6 sm:space-y-8">
+          <div className="inline-flex items-center gap-3 bg-white/5 border border-white/10 px-4 py-1.5 rounded-full backdrop-blur-md">
+            <span className="w-1.5 h-1.5 rounded-full bg-gold-500 animate-ping"></span>
+            <span className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-gold-400 font-semibold">
+              Premium Fleet Dubai
+            </span>
+          </div>
+          
+          <h1 className="font-serif text-4xl sm:text-6xl md:text-8xl font-black text-white tracking-[0.05em] uppercase leading-none">
+            Unleash the <br/>
+            <span className="gold-text-gradient font-bold tracking-[0.02em]">Ultimate</span> Drive
           </h1>
-          <p className="text-gray-300 text-sm sm:text-lg max-w-2xl mx-auto leading-relaxed">
-            Experience Dubai in a fleet that defines excellence. From naturally aspirated V10s to chauffeured ultra-luxury, secure your driving masterpiece today with zero deposits.
+          
+          <p className="text-gray-300 text-xs sm:text-base max-w-xl mx-auto leading-relaxed font-light">
+            Experience Dubai in a fleet that defines excellence. From naturally aspirated V10s to chauffeured luxury, secure your driving masterpiece today with zero security deposits.
           </p>
-          <div className="pt-6 flex flex-col sm:flex-row justify-center items-center gap-4">
+          
+          <div className="pt-6 flex flex-col sm:flex-row justify-center items-center gap-4 max-w-md mx-auto">
             <Link
               href="/fleet"
-              className="w-full sm:w-auto px-8 py-4 rounded-sm bg-gradient-to-r from-gold-600 via-gold-500 to-gold-700 text-black text-xs uppercase tracking-widest font-black hover:shadow-xl hover:shadow-gold-500/20 transition-all duration-300 flex items-center justify-center gap-2"
+              className="w-full px-8 py-4 rounded-sm bg-gradient-to-r from-gold-600 via-gold-500 to-gold-700 text-black text-xs uppercase tracking-[0.2em] font-black hover:shadow-2xl hover:shadow-gold-500/25 transition-all duration-300 flex items-center justify-center gap-2 border border-gold-500/10"
             >
-              <span>Explore The Fleet</span>
+              <span>Rent Now</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
             <a
               href="#conditions"
-              className="w-full sm:w-auto px-8 py-4 rounded-sm border border-white/20 hover:border-gold-500 text-white text-xs uppercase tracking-widest font-bold hover:bg-white/5 transition-all duration-300 text-center"
+              className="w-full px-8 py-4 rounded-sm border border-white/15 hover:border-gold-500 text-white text-xs uppercase tracking-[0.2em] font-bold hover:bg-white/5 transition-all duration-300 text-center"
             >
-              Rental Conditions
+              View Conditions
             </a>
+          </div>
+        </div>
+
+        {/* Mouse Wheel Scroll Down Indicator */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2.5 text-gray-500 z-10 select-none pointer-events-none">
+          <span className="text-[8px] uppercase tracking-[0.35em] text-gray-500">Scroll Down</span>
+          <div className="w-[18px] h-[30px] rounded-full border border-white/20 flex justify-center p-[4px]">
+            <div className="w-[2px] h-[6px] bg-gold-500 rounded-full animate-bounce"></div>
           </div>
         </div>
       </section>
 
-      {/* Infinite Scrolling Brand Strip */}
-      <section className="relative py-8 bg-[#0b0b0b] border-y border-white/5 overflow-hidden">
-        <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#0b0b0b] to-transparent z-10 pointer-events-none"></div>
-        <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#0b0b0b] to-transparent z-10 pointer-events-none"></div>
+      {/* Typographic Scrolling Brand Strip */}
+      <section className="relative py-10 bg-[#090909] border-y border-white/5 overflow-hidden">
+        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#090909] to-transparent z-10 pointer-events-none"></div>
+        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#090909] to-transparent z-10 pointer-events-none"></div>
         
-        {/* Infinite scrolling marquee wrapper */}
+        {/* Scrolling marquee */}
         <div className="flex w-[200%] animate-infinite-scroll">
-          {/* First set of brands */}
-          <div className="flex justify-around w-1/2 items-center">
+          {/* First set of brand logos */}
+          <div className="flex justify-around w-1/2 items-center gap-12">
             {brandLogos.map((brand, idx) => (
-              <div key={idx} className="flex items-center gap-2 select-none grayscale opacity-45 hover:opacity-100 hover:grayscale-0 transition-all duration-300">
-                <span className="text-xl">{brand.logo}</span>
-                <span className="text-sm font-bold uppercase tracking-widest text-white">{brand.name}</span>
+              <div key={idx} className="flex items-center select-none opacity-30 hover:opacity-100 transition-opacity duration-300 shrink-0">
+                <span className={`${brand.fontClass} text-white tracking-[0.25em] uppercase`}>
+                  {brand.logo}
+                </span>
               </div>
             ))}
           </div>
-          {/* Second set of brands for loop */}
-          <div className="flex justify-around w-1/2 items-center">
+          {/* Second set of brand logos for looping */}
+          <div className="flex justify-around w-1/2 items-center gap-12">
             {brandLogos.map((brand, idx) => (
-              <div key={`loop-${idx}`} className="flex items-center gap-2 select-none grayscale opacity-45 hover:opacity-100 hover:grayscale-0 transition-all duration-300">
-                <span className="text-xl">{brand.logo}</span>
-                <span className="text-sm font-bold uppercase tracking-widest text-white">{brand.name}</span>
+              <div key={`loop-${idx}`} className="flex items-center select-none opacity-30 hover:opacity-100 transition-opacity duration-300 shrink-0">
+                <span className={`${brand.fontClass} text-white tracking-[0.25em] uppercase`}>
+                  {brand.logo}
+                </span>
               </div>
             ))}
           </div>
@@ -149,24 +168,26 @@ export default function Home() {
       </section>
 
       {/* Trust Badges Bar */}
-      <section className="py-10 bg-luxury-black">
+      <section className="py-12 bg-luxury-black border-b border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <TrustBadgeRow />
         </div>
       </section>
 
-      {/* Featured Fleet (Own Fleet) */}
-      <section className="py-20 bg-gradient-to-b from-luxury-black via-[#090909] to-luxury-black">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Featured Fleet (Directly Owned Fleet) */}
+      <section className="py-24 bg-gradient-to-b from-[#070707] via-[#0b0b0b] to-[#070707] relative">
+        <div className="absolute inset-0 luxury-grid-lines opacity-10 pointer-events-none"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center space-y-4 mb-16">
-            <span className="text-xs uppercase tracking-widest text-gold-500 font-bold">
+            <span className="text-xs uppercase tracking-[0.25em] text-gold-500 font-extrabold block">
               EXCLUSIVE COLLECTION
             </span>
-            <h2 className="text-3xl sm:text-5xl font-extrabold text-white uppercase tracking-tight">
+            <h2 className="font-serif text-3xl sm:text-5xl font-black text-white uppercase tracking-[0.05em]">
               Featured <span className="gold-text-gradient">Owned</span> Fleet
             </h2>
-            <p className="text-gray-400 text-sm max-w-xl mx-auto">
-              Directly owned by our boutique. Kept in absolute pristine mechanical order and detailed daily to meet premium standards.
+            <div className="w-16 h-[1px] bg-gold-500 mx-auto mt-2"></div>
+            <p className="text-gray-400 text-xs sm:text-sm max-w-lg mx-auto font-light leading-relaxed">
+              Directly owned by our boutique. Kept in absolute pristine mechanical order and detailed daily to meet premium concierge standards.
             </p>
           </div>
 
@@ -181,12 +202,12 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="mt-12 text-center">
+          <div className="mt-16 text-center">
             <Link
               href="/fleet"
-              className="inline-flex items-center gap-2 text-gold-500 hover:text-white font-bold uppercase text-xs tracking-widest transition-colors group"
+              className="inline-flex items-center gap-2 text-gold-500 hover:text-white font-extrabold uppercase text-[10px] tracking-[0.3em] transition-colors group"
             >
-              <span>View Full Fleet Grid</span>
+              <span>View Full Fleet Inventory</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
@@ -194,31 +215,31 @@ export default function Home() {
       </section>
 
       {/* Top Choices Carousel */}
-      <section className="py-20 bg-[#0a0a0a]">
+      <section className="py-24 bg-[#090909] border-y border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-12">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6 mb-16">
             <div>
-              <span className="text-xs uppercase tracking-widest text-gold-500 font-bold">
-                TOP CHOICES
+              <span className="text-xs uppercase tracking-[0.25em] text-gold-500 font-extrabold block">
+                SPECIAL OFFERS
               </span>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-white uppercase tracking-tight mt-1">
-                Best Daily Offers
+              <h2 className="font-serif text-3xl sm:text-5xl font-black text-white uppercase tracking-[0.05em] mt-1">
+                Top Daily Choices
               </h2>
             </div>
             <Link
               href="/fleet"
-              className="text-xs text-gray-400 hover:text-gold-500 font-bold uppercase tracking-wider flex items-center gap-1.5 transition-colors"
+              className="text-[10px] text-gray-400 hover:text-gold-500 font-bold uppercase tracking-[0.2em] flex items-center gap-1.5 transition-colors border-b border-white/10 pb-1 hover:border-gold-500"
             >
-              Browse Category Filters <ArrowRight className="w-3.5 h-3.5" />
+              Browse Categories <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
 
           {/* Carousel container (Scrollable list with clean cards) */}
-          <div className="flex overflow-x-auto gap-6 pb-8 pt-2 no-scrollbar scroll-smooth snap-x snap-mandatory">
+          <div className="flex overflow-x-auto gap-8 pb-8 pt-2 no-scrollbar scroll-smooth snap-x snap-mandatory">
             {topChoices.map((vehicle) => (
               <div
                 key={vehicle.id}
-                className="w-[290px] sm:w-[350px] shrink-0 snap-start"
+                className="w-[290px] sm:w-[360px] shrink-0 snap-start"
               >
                 <VehicleCard vehicle={vehicle} onBookNow={handleBookNow} />
               </div>
@@ -228,32 +249,38 @@ export default function Home() {
       </section>
 
       {/* 3 Simple Steps Process */}
-      <section className="py-20 bg-luxury-black border-y border-white/5 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <span className="text-xs uppercase tracking-widest text-gold-500 font-bold">
+      <section className="py-24 bg-luxury-black relative">
+        <div className="absolute inset-0 luxury-grid-lines opacity-15 pointer-events-none"></div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center space-y-4 mb-20">
+            <span className="text-xs uppercase tracking-[0.25em] text-gold-500 font-extrabold block">
               HOW IT WORKS
             </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white uppercase tracking-tight">
-              3 Simple Steps to Drive
+            <h2 className="font-serif text-3xl sm:text-5xl font-black text-white uppercase tracking-[0.05em]">
+              Three Simple Steps to Drive
             </h2>
+            <div className="w-16 h-[1px] bg-gold-500 mx-auto mt-2"></div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
             {steps.map((step, idx) => (
-              <div key={idx} className="relative p-6 bg-white/5 border border-white/5 rounded group hover:border-gold-500/20 transition-all duration-300">
-                {/* Large stylized step number */}
-                <div className="absolute top-4 right-6 text-6xl md:text-7xl font-black text-white/5 group-hover:text-gold-500/5 select-none transition-colors">
+              <div
+                key={idx}
+                className="relative p-8 bg-gradient-to-b from-[#121212] to-[#0d0d0d] border border-white/5 rounded-sm group hover:border-gold-500/20 transition-all duration-300 flex flex-col justify-between"
+              >
+                {/* Large hollow gold-outlined step number in Cinzel */}
+                <div className="absolute top-4 right-6 text-7xl font-serif font-black text-stroke-gold select-none group-hover:text-gold-500/10 transition-colors">
                   {step.num}
                 </div>
-                <div className="space-y-4">
-                  <div className="p-3 bg-gold-500/10 border border-gold-500/20 rounded w-fit text-gold-500">
+                <div className="space-y-5">
+                  <div className="p-3.5 bg-white/5 border border-white/10 rounded w-fit text-gold-500 group-hover:bg-gold-500/10 group-hover:border-gold-500/20 transition-all">
                     {idx === 0 && <Key className="w-6 h-6" />}
                     {idx === 1 && <CalendarRange className="w-6 h-6" />}
                     {idx === 2 && <Trophy className="w-6 h-6" />}
                   </div>
-                  <h3 className="text-lg font-bold text-white uppercase tracking-wider">{step.title}</h3>
-                  <p className="text-sm text-gray-400 leading-relaxed">{step.desc}</p>
+                  <h3 className="text-base font-bold text-white uppercase tracking-[0.15em]">{step.title}</h3>
+                  <p className="text-xs sm:text-sm text-gray-400 font-light leading-relaxed">{step.desc}</p>
                 </div>
               </div>
             ))}
@@ -262,15 +289,16 @@ export default function Home() {
       </section>
 
       {/* Testimonials section */}
-      <section className="py-20 bg-[#090909]">
+      <section className="py-24 bg-[#090909] border-y border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <span className="text-xs uppercase tracking-widest text-gold-500 font-bold">
+          <div className="text-center space-y-4 mb-20">
+            <span className="text-xs uppercase tracking-[0.25em] text-gold-500 font-extrabold block">
               CLIENT TESTIMONIALS
             </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white uppercase tracking-tight">
-              What Our Clients Say
+            <h2 className="font-serif text-3xl sm:text-5xl font-black text-white uppercase tracking-[0.05em]">
+              Verified Client Reviews
             </h2>
+            <div className="w-16 h-[1px] bg-gold-500 mx-auto mt-2"></div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -288,71 +316,74 @@ export default function Home() {
       </section>
 
       {/* FAQ Accordion Section */}
-      <section id="faq" className="py-20 bg-luxury-black border-t border-white/5">
+      <section id="faq" className="py-24 bg-luxury-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-16">
-            <span className="text-xs uppercase tracking-widest text-gold-500 font-bold">
+            <span className="text-xs uppercase tracking-[0.25em] text-gold-500 font-extrabold block">
               QUESTIONS & ANSWERS
             </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white uppercase tracking-tight">
-              Frequently Asked Questions
+            <h2 className="font-serif text-3xl sm:text-5xl font-black text-white uppercase tracking-[0.05em]">
+              FAQ & Guidelines
             </h2>
+            <div className="w-16 h-[1px] bg-gold-500 mx-auto mt-2"></div>
           </div>
           <FAQAccordion />
         </div>
       </section>
 
       {/* Car Rental Conditions Section */}
-      <section id="conditions" className="py-20 bg-[#0b0b0b] border-t border-white/5">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="border border-gold-500/20 bg-gradient-to-r from-[#0d0d0d] to-luxury-black rounded-lg p-8 sm:p-12 relative overflow-hidden">
-            <div className="absolute right-0 top-0 w-32 h-32 bg-gold-500/5 blur-3xl rounded-full"></div>
+      <section id="conditions" className="py-24 bg-[#0a0a0a] border-t border-white/5 relative">
+        <div className="absolute inset-0 luxury-grid-lines opacity-10 pointer-events-none"></div>
+        
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="border border-gold-500/25 bg-[#0f0f0f] rounded p-8 sm:p-14 relative overflow-hidden shadow-2xl shadow-gold-500/[0.03]">
+            <div className="absolute right-0 top-0 w-48 h-48 bg-gold-500/[0.03] blur-3xl rounded-full"></div>
             
-            <div className="flex items-center gap-3 mb-6">
+            <div className="flex items-center gap-3.5 mb-8">
               <ShieldAlert className="w-8 h-8 text-gold-500 shrink-0" />
-              <h3 className="text-2xl font-black text-white uppercase tracking-wider">
-                Car Rental Conditions in Dubai
+              <h3 className="font-serif text-2xl sm:text-3xl font-black text-white uppercase tracking-wider">
+                Luxury Rental Conditions
               </h3>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm">
-              <div className="space-y-4">
-                <div className="flex gap-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 text-xs sm:text-sm">
+              <div className="space-y-6">
+                <div className="flex gap-4">
                   <BadgeInfo className="w-5 h-5 text-gold-500 shrink-0 mt-0.5" />
                   <div>
-                    <h5 className="text-white font-bold uppercase tracking-wider text-xs">Age Requirements</h5>
-                    <p className="text-gray-400 mt-1 leading-relaxed">
-                      Minimum age is 21 for general sports cars and SUVs. For elite models (e.g. Ferrari, Huracán), driver must be at least 25.
+                    <h5 className="text-white font-extrabold uppercase tracking-wider text-xs">Minimum Age Limits</h5>
+                    <p className="text-gray-400 mt-1.5 font-light leading-relaxed">
+                      Minimum age is 21 for general sports cars and luxury SUVs. For elite models (e.g. Ferrari, Huracán), drivers must be at least 25 years old.
                     </p>
                   </div>
                 </div>
-                <div className="flex gap-3">
+                <div className="flex gap-4">
                   <BadgeInfo className="w-5 h-5 text-gold-500 shrink-0 mt-0.5" />
                   <div>
-                    <h5 className="text-white font-bold uppercase tracking-wider text-xs">Security Deposit Policy</h5>
-                    <p className="text-gray-400 mt-1 leading-relaxed">
-                      We offer select zero-security-deposit options. Regular options require a credit card pre-authorization block released in 15-21 days.
+                    <h5 className="text-white font-extrabold uppercase tracking-wider text-xs">Deposit Policy</h5>
+                    <p className="text-gray-400 mt-1.5 font-light leading-relaxed">
+                      We offer select zero-security-deposit options on prestige sedans. Regular options require a credit card block released in 15-21 days.
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div className="space-y-4">
-                <div className="flex gap-3">
+              <div className="space-y-6">
+                <div className="flex gap-4">
                   <BadgeInfo className="w-5 h-5 text-gold-500 shrink-0 mt-0.5" />
                   <div>
-                    <h5 className="text-white font-bold uppercase tracking-wider text-xs">Mileage Limits</h5>
-                    <p className="text-gray-400 mt-1 leading-relaxed">
-                      Standard mileage limit is 250 km per day. Additional distance is charged per km depending on the vehicle class.
+                    <h5 className="text-white font-extrabold uppercase tracking-wider text-xs">Mileage Boundaries</h5>
+                    <p className="text-gray-400 mt-1.5 font-light leading-relaxed">
+                      Standard mileage allowance is 250 km per day. Additional distance is charged per km depending on the vehicle specification.
                     </p>
                   </div>
                 </div>
-                <div className="flex gap-3">
+                <div className="flex gap-4">
                   <BadgeInfo className="w-5 h-5 text-gold-500 shrink-0 mt-0.5" />
                   <div>
-                    <h5 className="text-white font-bold uppercase tracking-wider text-xs">Speed Limit Notice</h5>
-                    <p className="text-gray-400 mt-1 leading-relaxed">
-                      Federal radar systems penalize speeding. Maximum highway speed limit is 120-140 km/h. High-speed alerts will be triggered at 130 km/h.
+                    <h5 className="text-white font-extrabold uppercase tracking-wider text-xs">Federal Speed Regulations</h5>
+                    <p className="text-gray-400 mt-1.5 font-light leading-relaxed">
+                      Speeding is monitored via telemetry. In-car speed alerts will trigger at 130 km/h. Fines are direct client liabilities billed at return.
                     </p>
                   </div>
                 </div>

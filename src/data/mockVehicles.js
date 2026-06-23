@@ -319,12 +319,12 @@ export const mockVehicles = [
 ];
 
 export const brandLogos = [
-  { name: "Ferrari", logo: "🇮🇹" },
-  { name: "Lamborghini", logo: "🐂" },
-  { name: "Rolls-Royce", logo: "👑" },
-  { name: "Porsche", logo: "🏁" },
-  { name: "Bentley", logo: "🦅" },
-  { name: "Mercedes-AMG", logo: "⭐️" },
-  { name: "Audi Sport", logo: "⭕️⭕️⭕️⭕️" },
-  { name: "McLaren", logo: "🏎️" }
+  { name: "Ferrari", logo: "FERRARI", fontClass: "font-serif tracking-[0.35em] font-extrabold text-[11px]" },
+  { name: "Lamborghini", logo: "LAMBORGHINI", fontClass: "font-sans tracking-[0.25em] font-black text-[10px] italic" },
+  { name: "Rolls-Royce", logo: "ROLLS-ROYCE", fontClass: "font-serif tracking-[0.2em] font-medium text-[10px]" },
+  { name: "Porsche", logo: "PORSCHE", fontClass: "font-sans tracking-[0.45em] font-bold text-[10px]" },
+  { name: "Bentley", logo: "BENTLEY", fontClass: "font-serif tracking-[0.3em] font-semibold text-[10px]" },
+  { name: "Mercedes-AMG", logo: "AMG", fontClass: "font-sans tracking-[0.1em] font-black text-sm italic" },
+  { name: "Audi Sport", logo: "AUDI SPORT", fontClass: "font-sans tracking-[0.2em] font-extrabold text-[10px]" },
+  { name: "McLaren", logo: "McLAREN", fontClass: "font-sans tracking-[0.15em] font-black text-[11px] italic" }
 ];

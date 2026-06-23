@@ -92,11 +92,11 @@ export default function VehicleDetail({ params }) {
           <div className="lg:col-span-5 space-y-8">
             {/* Header info */}
             <div>
-              <span className="text-xs uppercase tracking-wider text-gold-500 font-bold block">
+              <span className="text-xs uppercase tracking-[0.25em] text-gold-500 font-bold block">
                 {vehicle.category} CAR
               </span>
-              <h1 className="text-3xl sm:text-5xl font-black text-white uppercase tracking-tight mt-1 leading-none">
-                {vehicle.brand} <span className="gold-text-gradient">{vehicle.name}</span>
+              <h1 className="font-serif text-3xl sm:text-5xl font-black text-white uppercase tracking-[0.05em] mt-1 leading-none">
+                {vehicle.brand} <span className="gold-text-gradient font-bold">{vehicle.name}</span>
               </h1>
               <p className="text-sm text-gray-400 mt-4 leading-relaxed">
                 {vehicle.description}
@@ -180,7 +180,7 @@ export default function VehicleDetail({ params }) {
 
         {/* Technical Specifications Grid */}
         <div className="mt-20 pt-10 border-t border-white/5">
-          <h3 className="text-xl font-bold text-white uppercase tracking-wider mb-8">
+          <h3 className="font-serif text-xl font-black text-white uppercase tracking-[0.05em] mb-8">
             Technical Specifications
           </h3>
           <SpecsGrid
@@ -194,7 +194,7 @@ export default function VehicleDetail({ params }) {
         {/* Features Checklist */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-16 pt-10 border-t border-white/5">
           <div>
-            <h3 className="text-xl font-bold text-white uppercase tracking-wider mb-6">
+            <h3 className="font-serif text-xl font-black text-white uppercase tracking-[0.05em] mb-6">
               Included Features
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
